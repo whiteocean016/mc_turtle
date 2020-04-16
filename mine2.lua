@@ -138,10 +138,11 @@ end
 function check_ore()
   local succ, data = turtle.inspect()
   if succ then
-    local str = data.name
-    str = string.lower(str)
-    local index = string.find(str, "ore")
-    if index ~= nill then
+    local str = string.lower(data.name)
+    --TODO better way of determining valuable blocks
+    local idx_ore = string.find(str, "ore")
+    local idx_ic2 = string.find(str, "ic2") -- industrial craft 2 blocks
+    if idx_ore ~= nill or idx_ic2 ~= nill then
       print("Found ", data.name)
       turtle.dig()
       fuel()
