@@ -158,7 +158,11 @@ function check_ore()
         check_ore()
         go_up()
       end
-      --TODO add ore chech for upward direction
+      if turtle.detectUp() then
+        go_up()
+        check_ore()
+        go_down()
+      end
       fuel()
       turtle.back()
     end
@@ -172,9 +176,11 @@ function find_junk()
     if data then
       local str = data.name
       str = string.lower(str)
-      local index1 = string.find(str, "stone")
-      local index2 = string.find(str, "dirt")
-      if index1 ~= nill or index2 ~= nill then
+      --TODO add other junk material (gravel, ?)
+      local stone = string.find(str, "stone")
+      local dirt = string.find(str, "dirt")
+      local andesite = string.find(str, "andesite")
+      if stone ~= nill or dirt ~= nill or andesite ~= nill then
         return i
       end
     end
