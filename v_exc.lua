@@ -174,6 +174,7 @@ end
 -----MAIN-----
 --------------
 
+local depth_current = 0
 for h = 1, DEPTH do
     -- check bedrock
     local succ, data = turtle.inspectDown()
@@ -195,10 +196,11 @@ for h = 1, DEPTH do
         end
         turtle.turnLeft()
     end
+    depth_current = depth_current + 1
 end
 
--- if return
-for d = 1, h do
+-- return
+for d = 1, depth_current do
     go_up()
 end
 
