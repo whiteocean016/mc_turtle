@@ -193,8 +193,11 @@ for h = 1, DEPTH do
             turtle.dig()
         end
         turtle.turnLeft()
+    end
+end
 
 -- if return
 for d = 1, h do
     go_up()
+end
 
