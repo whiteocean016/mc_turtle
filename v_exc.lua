@@ -202,5 +202,12 @@ end
 -- return
 for d = 1, depth_current do
     go_up()
+    if REFILL then
+        junk = find_junk()
+        if junk then
+            turtle.select(junk)
+            turtle.placeDown()
+        end
+    end
 end
 
