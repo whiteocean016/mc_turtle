@@ -156,12 +156,26 @@ function check_ore()
       turtle.turnLeft()
       if turtle.detectDown() then
         go_down()
-        check_ore()
+        check_ore() -- preveri pred sabo
+        turtle.turnLeft()
+        check_ore() -- preveri na levi
+        turtle.turnLeft()
+        check_ore() -- preveri na za sabo
+        turtle.turnLeft()
+        check_ore() -- preveri na desni
+        turtle.turnLeft()
         go_up()
       end
       if turtle.detectUp() then
         go_up()
-        check_ore()
+        check_ore() -- preveri pred sabo
+        turtle.turnLeft()
+        check_ore() -- preveri na levi
+        turtle.turnLeft()
+        check_ore() -- preveri na za sabo
+        turtle.turnLeft()
+        check_ore() -- preveri na desni
+        turtle.turnLeft()
         go_down()
       end
       fuel()
