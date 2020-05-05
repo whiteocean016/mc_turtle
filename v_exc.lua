@@ -107,24 +107,27 @@ end
 
 
 -- Check if valuable ore
+ore_names = {"ore", "ic2"} --industrial craft 2 blocks
+
 function check_ore()
     local succ, data = turtle.inspect()
     if succ then
         local str = string.lower(data.name)
-        --TODO better way of determining valuable blocks
-        local idx_ore = string.find(str, "ore")
-        local idx_ic2 = string.find(str, "ic2") -- industrial craft 2 blocks
-        if idx_ore ~= nill or idx_ic2 ~= nill then
-            print("Found ", data.name)
-            return true
-        else
-            return false
+
+        for idx, block_name in ipairs(ore_names) do
+            local ore = string.find(str, block_name)
+            if ore ~= nill then
+                print("Found: ", data.name)
+                return true
+            else
+                return false
+            end
         end
     end
 end
 
 --TODO add other junk material (?)
-junk_names = {"stone", "dirt", "gravel", "andesite", "marble",}
+junk_names = {"stone", "dirt", "gravel", "andesite", "marble", "diorite"}
 
 function find_junk()
     local data
