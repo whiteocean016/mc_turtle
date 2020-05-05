@@ -107,7 +107,7 @@ end
 
 
 -- Check if valuable ore
-ore_names = {"ore", "ic2"} --industrial craft 2 blocks
+ore_names = {"ore", "ic2", "thermalfoundation", "galacticraftcore"} --industrial craft 2 and other other mods
 
 function check_ore()
     local succ, data = turtle.inspect()
