@@ -5,7 +5,7 @@
 -- On the way collects valuable ores from its 4
 -- neighbuoring blocks (does not follow veins).
 
-
+--TODO get this file over rednet https://gaming.stackexchange.com/questions/247948/how-to-make-a-turtle-run-a-program-over-the-modem-api-in-computercraft
 local args = {...}
 
 local REFILL, DEPTH
@@ -123,20 +123,22 @@ function check_ore()
     end
 end
 
+--TODO add other junk material (?)
+junk_names = {"stone", "dirt", "gravel", "andesite", "marble",}
+
 function find_junk()
     local data
-    for i = 1, 16 do
+    for i = 16, 1, -1 do
         data = turtle.getItemDetail(i)
         if data then
             local str = data.name
             str = string.lower(str)
-            --TODO add other junk material (gravel, ?)
-            local stone = string.find(str, "stone")
-            local dirt = string.find(str, "dirt")
-            local andesite = string.find(str, "andesite")
-            if stone ~= nill or dirt ~= nill or andesite ~= nill then
-                return i
-            end
+
+            for idx, block_name in ipairs(junk_names) do
+                local junk = string.find(str, block_name)
+                if junk ~= nill then
+                    return i
+                end
         end
     end
     return false
