@@ -139,6 +139,7 @@ function find_junk()
                 if junk ~= nill then
                     return i
                 end
+            end
         end
     end
     return false
