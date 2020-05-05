@@ -155,15 +155,15 @@ end
 --------------
 
 local expected_depth
-if DEPTH ~= 9999 then
-    expected_depth = 30
+if DEPTH == 9999 then
+    expected_depth = 100
 else
     expected_depth = DEPTH
 end
 
 -- Fuel check in advance
 --TODO calculate available fuel (distance) from inventory
-local fuelSlot    = findAndRefuel()
+local fuelSlot = findAndRefuel()
 local currentFuelLevel = turtle.getFuelLevel()
 local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
 print("Fuel needed at least: ", (expected_depth)*2 )
