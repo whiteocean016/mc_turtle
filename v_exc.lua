@@ -123,10 +123,10 @@ function check_ore()
             if string.find(str, block_name) then
                 print("Found: ", data.name)
                 return true
-            else
-                return false
             end
         end
+
+        return false
     end
 end
 
