@@ -12,7 +12,7 @@ local REFILL, DEPTH
 
 if #args == 1 then
     REFILL = tonumber( args[1] )
-    DEPTH = 9999
+    DEPTH = 100
 elseif #args == 2 then
         REFILL = tonumber( args[1] )
         DEPTH = tonumber( args[2] )
@@ -21,7 +21,7 @@ else
 end
 
 print("Running miner with arguments")
-print("Depth    = ", DEPTH)
+print("Depth  = ", DEPTH)
 print("Refill = ", REFILL)
 
 --- FUNCTIONS ---
@@ -154,24 +154,17 @@ end
 ----PREREQ----
 --------------
 
-local expected_depth
-if DEPTH ~= 9999 then
-    expected_depth = 30
-else
-    expected_depth = DEPTH
-end
-
 -- Fuel check in advance
 --TODO calculate available fuel (distance) from inventory
 local fuelSlot    = findAndRefuel()
 local currentFuelLevel = turtle.getFuelLevel()
 local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
-print("Fuel needed at least: ", (expected_depth)*2 )
-print("Recommened fuel:      ", (expected_depth+2)*2 )
+print("Fuel needed at least: ", (DEPTH)*2 )
+print("Recommened fuel:      ", (DEPTH+2)*2 )
 print("Available fuel:       ", availableFuelLevel )
 
-if availableFuelLevel < (expected_depth)*2 then
-    print("Fuel needed at least: ", (expected_depth)*2)
+if availableFuelLevel < (DEPTH)*2 then
+    print("Fuel needed at least: ", (DEPTH)*2)
     error("Not enough fuel.")
 end
 
