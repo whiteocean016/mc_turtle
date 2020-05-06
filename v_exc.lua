@@ -107,7 +107,7 @@ end
 
 
 -- Check if valuable ore
-ore_names = {"ore", "ic2"} --industrial craft 2 blocks
+ore_names = {"ore", "ic2", "thermalfoundation", "galacticraftcore"} --industrial craft 2 and other other mods
 
 function check_ore()
     local succ, data = turtle.inspect()
@@ -154,9 +154,16 @@ end
 ----PREREQ----
 --------------
 
+local expected_depth
+if DEPTH == 9999 then
+    expected_depth = 100
+else
+    expected_depth = DEPTH
+end
+
 -- Fuel check in advance
 --TODO calculate available fuel (distance) from inventory
-local fuelSlot    = findAndRefuel()
+local fuelSlot = findAndRefuel()
 local currentFuelLevel = turtle.getFuelLevel()
 local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
 print("Fuel needed at least: ", (DEPTH)*2 )
