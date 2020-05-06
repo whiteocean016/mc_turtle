@@ -11,13 +11,21 @@ local args = {...}
 local REFILL, DEPTH
 
 if #args == 0 then
-    REFILL = 1
+    REFILL = false
     DEPTH = 100
 elseif #args == 1 then
-    REFILL = tonumber( args[1] )
+    if tonumber( args[1] ) == 0 then
+        REFILL = false
+    else
+        REFILL = true
+    end
     DEPTH = 100
 elseif #args == 2 then
-    REFILL = tonumber( args[1] )
+    if tonumber( args[1] ) == 0 then
+        REFILL = false
+    else
+        REFILL = true
+    end
     DEPTH = tonumber( args[2] )
 else
     error("Usage: v_exc refill[0|1] [depth] \n")
@@ -118,8 +126,6 @@ function check_ore()
         local str = string.lower(data.name)
 
         for idx, block_name in ipairs(ore_names) do
-            print("Checking for block "..block_name)
-            print(string.find(str, block_name))
             if string.find(str, block_name) then
                 print("Found: ", data.name)
                 return true
