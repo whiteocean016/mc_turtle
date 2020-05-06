@@ -10,12 +10,15 @@ local args = {...}
 
 local REFILL, DEPTH
 
-if #args == 1 then
+if #args == 0 then
+    REFILL = 1
+    DEPTH = 100
+elseif #args == 1 then
     REFILL = tonumber( args[1] )
     DEPTH = 100
 elseif #args == 2 then
-        REFILL = tonumber( args[1] )
-        DEPTH = tonumber( args[2] )
+    REFILL = tonumber( args[1] )
+    DEPTH = tonumber( args[2] )
 else
     error("Usage: v_exc refill[0|1] [depth] \n")
 end
