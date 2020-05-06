@@ -118,8 +118,7 @@ function check_ore()
         local str = string.lower(data.name)
 
         for idx, block_name in ipairs(ore_names) do
-            local ore = string.find(str, block_name)
-            if ore ~= nill then
+            if string.find(str, block_name) then
                 print("Found: ", data.name)
                 return true
             else
@@ -141,8 +140,7 @@ function find_junk()
             str = string.lower(str)
 
             for idx, block_name in ipairs(junk_names) do
-                local junk = string.find(str, block_name)
-                if junk ~= nill then
+                if string.find(str, block_name) then
                     return i
                 end
             end
