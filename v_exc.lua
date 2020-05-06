@@ -154,13 +154,6 @@ end
 ----PREREQ----
 --------------
 
-local expected_depth
-if DEPTH == 9999 then
-    expected_depth = 100
-else
-    expected_depth = DEPTH
-end
-
 -- Fuel check in advance
 --TODO calculate available fuel (distance) from inventory
 local fuelSlot = findAndRefuel()
