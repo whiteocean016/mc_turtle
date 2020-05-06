@@ -118,6 +118,8 @@ function check_ore()
         local str = string.lower(data.name)
 
         for idx, block_name in ipairs(ore_names) do
+            print("Checking for block "..block_name)
+            print(string.find(str, block_name))
             if string.find(str, block_name) then
                 print("Found: ", data.name)
                 return true
