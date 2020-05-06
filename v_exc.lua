@@ -11,7 +11,7 @@ local args = {...}
 local REFILL, DEPTH
 
 if #args == 0 then
-    REFILL = false
+    REFILL = true
     DEPTH = 100
 elseif #args == 1 then
     if tonumber( args[1] ) == 0 then
