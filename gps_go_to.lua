@@ -73,7 +73,7 @@ end
 --- MAIN ---
 
 -- go to x
-d_x = x_0 - x
+d_x = x - x_0
 if d_x > 0 then
     for i=1,d_x do
         go_forward()
@@ -92,7 +92,7 @@ end
 
 -- go to z
 turtle.turnRight()
-d_z = z_0 - z
+d_z = z - z_0
 if d_z > 0 then
     for i=1,d_z do
         go_forward()
