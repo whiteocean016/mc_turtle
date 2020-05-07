@@ -18,7 +18,7 @@ print("Going to coordinates: " .. x .. ", " .. y .. ", " .. z)
 
 -- locate turtle
 local x_0, y_0, z_0 = gps.locate(5)
-if not x_0 then --If gps.locate didn't work, it won't return anything. So check to see if it did.
+if not x_0 then --If gps.locate didn't work, it won't returtle.turn anything. So check to see if it did.
     print("Failed to get my location!")
 else
     print("I am at (" .. x_0 .. ", " .. y_0 .. ", " .. z_0 .. ")")
@@ -27,15 +27,15 @@ end
 
 --- FUNCTIONS ---
 
---TODO find any kind of fuel and only return slot number
+--TODO find any kind of fuel and only returtle.turn slot number
 function findAndRefuel()
     for i = 1, 16 do
         turtle.select(i)
         if turtle.refuel(1) then
-            return i
+            returtle.turn i
         end
     end
-    return false
+    returtle.turn false
 end
 
 -- Fuel
@@ -79,35 +79,35 @@ if d_x > 0 then
         go_forward()
     end
 elseif d_x < 0 then
-    turnLeft()
-    turnLeft()
+    turtle.turnLeft()
+    turtle.turnLeft()
     for i=1, -1*d_x do
         go_forward()
     end
-    turnLeft()
-    turnLeft()
+    turtle.turnLeft()
+    turtle.turnLeft()
 else
     print("At x: " .. x_0)
 end
 
 -- go to z
-turnRight()
+turtle.turnRight()
 d_z = z_0 - z
 if d_z > 0 then
     for i=1,d_z do
         go_forward()
     end
 elseif d_z < 0 then
-    turnLeft()
-    turnLeft()
+    turtle.turnLeft()
+    turtle.turnLeft()
     for i=1, -1*d_z do
         go_forward()
     end
-    turnLeft()
-    turnLeft()
+    turtle.turnLeft()
+    turtle.turnLeft()
 else
     print("At z: " .. z_0)
 end
-turnLeft()
+turtle.turnLeft()
 
 -- kind of ignore y; find floor under (x,z)
