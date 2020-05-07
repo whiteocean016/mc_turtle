@@ -50,11 +50,13 @@ end
 -- Non-destructive movement forward/backward/up/...
 function go_forward()
     fuel()
+    local has_waited = false
     while not turtle.forward() do
         local success, data = turtle.inspect()
-        if success & string.find(data.name, "turtle") then
+        if success and string.find(data.name, "turtle") and not has_waited then
             -- wait time based on computerID (lower waits less has higher priority)
             sleep(os.computerID())
+            has_waited = true
         else
             go_up()
         end
