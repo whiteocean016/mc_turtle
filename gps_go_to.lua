@@ -147,5 +147,10 @@ else
 end
 turtle.turnLeft()
 
--- kind of ignore y; find floor under (x,z)
 --TODO keep track of y
+-- kind of ignore y; find floor under (x,z)
+while turtle.down() do
+    --going down
+    fuel()
+end
+
