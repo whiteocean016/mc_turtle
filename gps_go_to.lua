@@ -18,7 +18,7 @@ print("Going to coordinates: " .. x .. ", " .. y .. ", " .. z)
 
 -- locate turtle
 local x_0, y_0, z_0 = gps.locate(5)
-if not x_0 then --If gps.locate didn't work, it won't returtle.turn anything. So check to see if it did.
+if not x_0 then --If gps.locate didn't work, it won't return anything. So check to see if it did.
     print("Failed to get my location!")
 else
     print("I am at (" .. x_0 .. ", " .. y_0 .. ", " .. z_0 .. ")")
@@ -27,15 +27,15 @@ end
 
 --- FUNCTIONS ---
 
---TODO find any kind of fuel and only returtle.turn slot number
+--TODO find any kind of fuel and only return slot number
 function findAndRefuel()
     for i = 1, 16 do
         turtle.select(i)
         if turtle.refuel(1) then
-            returtle.turn i
+            return i
         end
     end
-    returtle.turn false
+    return false
 end
 
 -- Fuel
