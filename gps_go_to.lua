@@ -48,20 +48,8 @@ end
 -- Non-destructive movement forward/backward/up/...
 function go_forward()
     fuel()
-    while not turtle.forward() then
+    while not turtle.forward() do
         go_up()
-    end
-end
-
-function go_back()
-    fuel()
-    if not turtle.back() then
-        turtle.turnLeft()
-        turtle.turnLeft()
-        turtle.dig()
-        turtle.forward()
-        turtle.turnLeft()
-        turtle.turnLeft()
     end
 end
 
@@ -79,29 +67,6 @@ function go_down()
         turtle.digDown()
         turtle.down()
     end
-end
-
-
--- Destructive move left/right (TURN)
-function go_right()
-    turtle.turnRight()
-    go_forward()
-end
-
-function go_left()
-    turtle.turnLeft()
-    go_forward()
-end
-
--- Destructive move left/right (STRAFE)
-function strf_right()
-    go_right()
-    turtle.turnLeft()
-end
-
-function strf_left()
-    go_left()
-    turtle.turnRight()
 end
 
 
