@@ -1,7 +1,10 @@
 --[[ Go to GPS location ]]--
 -- Goes to specific gps location provided by x, y, z arguments
 
+-------------
 --- INPUT ---
+-------------
+
 local args = {...}
 
 local x, y, z
@@ -10,7 +13,7 @@ if #args == 3 then
     x = tonumber( args[1] )
     y = tonumber( args[2] )
     z = tonumber( args[3] )
-    local v_dst = vector.new(x, y, z)
+    v_dst = vector.new(x, y, z)
 else 
     error("Usage: gps_go_to x y z \n")
 end
@@ -23,14 +26,34 @@ if not x_0 then --If gps.locate didn't work, it won't return anything. So check 
     error("Failed to get my location!")
 else
     print("I am at (" .. x_0 .. ", " .. y_0 .. ", " .. z_0 .. ")")
-    local v_src = vector.new(x_0, y_0, z_0)
+    v_src = vector.new(x_0, y_0, z_0)
 end
 
 local v_disp = v_dst - v_src
---TODO fuel check here (L1 distance)
 
+--------------
+----PREREQ----
+--------------
 
+dist_L1 = math.abs( v_disp.x ) + math.abs( v_disp.y ) + math.abs( v_disp.z )
+
+-- Fuel check in advance
+--TODO calculate available fuel (distance) from inventory
+local fuelSlot = findAndRefuel()
+local currentFuelLevel = turtle.getFuelLevel()
+local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
+print("Fuel needed at least: ", dist_L1)
+print("Recommened fuel:      ", dist_L1 + 10 )
+print("Available fuel:       ", availableFuelLevel )
+
+if availableFuelLevel < dist_L1 then
+    print("Fuel needed at least: ", dist_L1)
+    error("Not enough fuel.")
+end
+
+-----------------
 --- FUNCTIONS ---
+-----------------
 
 --TODO find any kind of fuel and only return slot number
 function findAndRefuel()
@@ -82,8 +105,9 @@ function go_down()
     end
 end
 
-
+------------
 --- MAIN ---
+------------
 
 -- go to x
 d_x = v_disp.x
