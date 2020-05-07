@@ -10,6 +10,7 @@ if #args == 3 then
     x = tonumber( args[1] )
     y = tonumber( args[2] )
     z = tonumber( args[3] )
+    local v_dst = vector.new(x, y, z)
 else 
     error("Usage: gps_go_to x y z \n")
 end
@@ -19,11 +20,13 @@ print("Going to coordinates: " .. x .. ", " .. y .. ", " .. z)
 -- locate turtle
 local x_0, y_0, z_0 = gps.locate(5)
 if not x_0 then --If gps.locate didn't work, it won't return anything. So check to see if it did.
-    print("Failed to get my location!")
+    error("Failed to get my location!")
 else
     print("I am at (" .. x_0 .. ", " .. y_0 .. ", " .. z_0 .. ")")
+    local v_src = vector.new(x_0, y_0, z_0)
 end
 
+local v_disp = v_dst - v_src
 --TODO fuel check here (L1 distance)
 
 
@@ -55,7 +58,7 @@ function go_forward()
         local success, data = turtle.inspect()
         if success and string.find(data.name, "turtle") and not has_waited then
             -- wait time based on computerID (lower waits less has higher priority)
-            sleep(os.computerID())
+            sleep(os.computerID() / 10)
             has_waited = true
         else
             go_up()
@@ -83,7 +86,7 @@ end
 --- MAIN ---
 
 -- go to x
-d_x = x - x_0
+d_x = v_disp.x
 if d_x > 0 then
     for i=1,d_x do
         go_forward()
@@ -102,7 +105,7 @@ end
 
 -- go to z
 turtle.turnRight()
-d_z = z - z_0
+d_z = v_disp.z
 if d_z > 0 then
     for i=1,d_z do
         go_forward()
