@@ -31,25 +31,6 @@ end
 
 local v_disp = v_dst - v_src
 
---------------
-----PREREQ----
---------------
-
-dist_L1 = math.abs( v_disp.x ) + math.abs( v_disp.y ) + math.abs( v_disp.z )
-
--- Fuel check in advance
---TODO calculate available fuel (distance) from inventory
-local fuelSlot = findAndRefuel()
-local currentFuelLevel = turtle.getFuelLevel()
-local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
-print("Fuel needed at least: ", dist_L1)
-print("Recommened fuel:      ", dist_L1 + 10 )
-print("Available fuel:       ", availableFuelLevel )
-
-if availableFuelLevel < dist_L1 then
-    print("Fuel needed at least: ", dist_L1)
-    error("Not enough fuel.")
-end
 
 -----------------
 --- FUNCTIONS ---
@@ -104,6 +85,28 @@ function go_down()
         turtle.down()
     end
 end
+
+
+--------------
+----PREREQ----
+--------------
+
+dist_L1 = math.abs( v_disp.x ) + math.abs( v_disp.y ) + math.abs( v_disp.z )
+
+-- Fuel check in advance
+--TODO calculate available fuel (distance) from inventory
+local fuelSlot = findAndRefuel()
+local currentFuelLevel = turtle.getFuelLevel()
+local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
+print("Fuel needed at least: ", dist_L1)
+print("Recommened fuel:      ", dist_L1 + 10 )
+print("Available fuel:       ", availableFuelLevel )
+
+if availableFuelLevel < dist_L1 then
+    print("Fuel needed at least: ", dist_L1)
+    error("Not enough fuel.")
+end
+
 
 ------------
 --- MAIN ---
