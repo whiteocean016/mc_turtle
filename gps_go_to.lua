@@ -24,6 +24,8 @@ else
     print("I am at (" .. x_0 .. ", " .. y_0 .. ", " .. z_0 .. ")")
 end
 
+--TODO fuel check here (L1 distance)
+
 
 --- FUNCTIONS ---
 
@@ -49,7 +51,13 @@ end
 function go_forward()
     fuel()
     while not turtle.forward() do
-        go_up()
+        local success, data = turtle.inspect()
+        if success & string.find(data.name, "turtle") then
+            -- wait time based on computerID (lower waits less has higher priority)
+            sleep(os.computerID())
+        else
+            go_up()
+        end
     end
 end
 
@@ -87,7 +95,7 @@ elseif d_x < 0 then
     turtle.turnLeft()
     turtle.turnLeft()
 else
-    print("At x: " .. x_0)
+    print("At x: " .. x)
 end
 
 -- go to z
@@ -106,8 +114,9 @@ elseif d_z < 0 then
     turtle.turnLeft()
     turtle.turnLeft()
 else
-    print("At z: " .. z_0)
+    print("At z: " .. z)
 end
 turtle.turnLeft()
 
 -- kind of ignore y; find floor under (x,z)
+--TODO keep track of y
