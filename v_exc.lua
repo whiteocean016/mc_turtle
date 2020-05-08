@@ -5,7 +5,6 @@
 -- On the way collects valuable ores from its 4
 -- neighbuoring blocks (does not follow veins).
 
---TODO get this file over rednet https://gaming.stackexchange.com/questions/247948/how-to-make-a-turtle-run-a-program-over-the-modem-api-in-computercraft
 local args = {...}
 
 local REFILL, DEPTH
