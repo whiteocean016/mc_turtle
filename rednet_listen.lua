@@ -11,5 +11,8 @@ while true do
         break
     end
     shell.run(message)
+
+    -- send done message
+    rednet.send(senderID, "done")
 end
 rednet.close("right")
