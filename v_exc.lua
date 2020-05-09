@@ -159,7 +159,7 @@ function find_junk()
             str = string.lower(str)
 
             for idx, block_name in ipairs(junk_names) do
-                if string.find(str, block_name) then
+                if string.find(str, block_name) and not string.find(str, "redstone") then
                     return i
                 end
             end
