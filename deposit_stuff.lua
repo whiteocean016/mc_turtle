@@ -20,7 +20,13 @@ end
 shell.run("gps_go_to", v_chest.x, v_chest.y, v_chest.z)
 
 -- drop stuff
+function checkIfFuel()
+    return turtle.refuel(0)
+end
+
 for i = 1, 16 do
     turtle.select(i)
-    turtle.dropDown()
+    if not checkIfFuel() then
+        turtle.dropDown()
+    end
 end
