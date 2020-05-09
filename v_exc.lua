@@ -117,7 +117,12 @@ end
 
 
 -- Check if valuable ore
-ore_names = {"ore", "ic2", "thermalfoundation", "galacticraftcore"} --industrial craft 2 and other other mods
+ore_names = {
+    "ore",
+    "ic2", -- industrial craft and other mods
+    "thermalfoundation",
+    "galacticraftcore"
+}
 
 function check_ore()
     local succ, data = turtle.inspect()
@@ -136,7 +141,14 @@ function check_ore()
 end
 
 --TODO add other junk material (?)
-junk_names = {"stone", "dirt", "gravel", "andesite", "marble", "diorite"}
+junk_names = {
+    "stone",
+    "dirt",
+    --"gravel",
+    "andesite",
+    "marble",
+    "diorite"
+}
 
 function find_junk()
     local data
