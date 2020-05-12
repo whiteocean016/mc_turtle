@@ -11,20 +11,12 @@ hole_coords = {
     vector.new(4,0,2)
 }
 
--- check blocks TODO
-blocks_todo = {}
-for line in io.lines("data_mining/todo.dat") do
-    blocks_todo[#blocks_todo + 1] = line
-end
-
 blocks_done = {}
 for line in io.lines("data_mining/done.dat") do
     blocks_done[#blocks_done + 1] = line
 end
 
--- if all done, add new block
-if #blocks_todo == 0 then
-    
+block_id = #blocks_done + 1
 
 -- convert block id to coordinates via pairing function
 function unpair(z)
