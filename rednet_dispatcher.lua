@@ -11,12 +11,7 @@ hole_coords = {
     vector.new(4,0,2)
 }
 
---blocks_done = {}
---for line in io.lines("data_mining/done.dat") do
---    blocks_done[#blocks_done + 1] = line
---end
-
---block_id = #blocks_done
+-- check last dugg-up block
 local fd = fs.open("data_mining/last_block.dat", "r")
 block_id = tonumber(fd.readAll()) + 1
 fd.close()
@@ -54,9 +49,7 @@ end
 rednet.close("right")
 print("Block done")
 
---local fd = fs.open("data_mining/done.dat", "a")
---fd.write(string.format("\n%d", block_id))
---fd.close()
+-- save id of block
 local fd = fs.open("data_mining/last_block.dat", "w")
 fd.write(block_id)
 fd.close()

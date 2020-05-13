@@ -124,19 +124,29 @@ ore_names = {
     "galacticraftcore"
 }
 
-function check_ore()
-    local succ, data = turtle.inspect()
+function check_ore(direction)
+    local succ, data
+    if direction == "f" then
+        succ, data = turtle.inspect()
+    elseif direction == "d" then
+        succ, data = turtle.inspectDown()
+    elseif direction == "u" then
+        succ, data = turtle.inspectUp()
+    else
+        error("unknown direction")
+    end
+
     if succ then
         local str = string.lower(data.name)
 
         for idx, block_name in ipairs(ore_names) do
             if string.find(str, block_name) then
                 print("Found: ", data.name)
-                return true
+                return true, str
             end
         end
 
-        return false
+        return false, str
     end
 end
 
@@ -168,6 +178,20 @@ function find_junk()
     return false
 end
 
+function find_block(name)
+    local data
+    for i = 1, 16 do
+        data = turtle.getItemDetail(i)
+        if data then
+            local str = string.lower(data.name)
+
+            if str == name then
+                return true, i
+            end
+        end
+    end
+    return false, nil
+end
 
 
 --------------
@@ -192,16 +216,18 @@ end
 --------------
 -----MAIN-----
 --------------
-
+history = {}
 local depth_current = 0
 for h = 1, DEPTH do
-    -- check bedrock
-    local succ, data = turtle.inspectDown()
-    if succ then
-        local name_block = string.lower(data.name)
-        if string.find(name_block, "bedrock") then
-            break
-        end
+    -- check under
+    valuable, name_block = check_ore("d")
+    if string.find(name_block, "bedrock") then
+        -- stop if we hit bedrock
+        break
+    elseif valuable then
+        history[h] = ""
+    else
+        history[h] = name_block
     end
 
     -- check fuel
@@ -209,7 +235,7 @@ for h = 1, DEPTH do
 
     go_down()
     for d = 1, 4 do
-        local valuable = check_ore()
+        local valuable = check_ore("f")
         if valuable then
             turtle.dig()
         end
@@ -219,12 +245,17 @@ for h = 1, DEPTH do
 end
 
 -- return
-for d = 1, depth_current do
+for d = depth_current, 1, -1 do
     go_up()
     if REFILL then
-        junk = find_junk()
-        if junk then
-            turtle.select(junk)
+        --junk = find_junk()
+        --if junk then
+        --    turtle.select(junk)
+        --    turtle.placeDown()
+        --end
+        success, idx = find_block(history[d])
+        if success then
+            turtle.select(idx)
             turtle.placeDown()
         end
     end
