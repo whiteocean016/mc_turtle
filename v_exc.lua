@@ -147,6 +147,8 @@ function check_ore(direction)
         end
 
         return false, str
+    else
+        return false, ""
     end
 end
 
