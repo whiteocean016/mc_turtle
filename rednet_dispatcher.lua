@@ -11,12 +11,16 @@ hole_coords = {
     vector.new(4,0,2)
 }
 
-blocks_done = {}
-for line in io.lines("data_mining/done.dat") do
-    blocks_done[#blocks_done + 1] = line
-end
+--blocks_done = {}
+--for line in io.lines("data_mining/done.dat") do
+--    blocks_done[#blocks_done + 1] = line
+--end
 
-block_id = #blocks_done
+--block_id = #blocks_done
+local fd = fs.open("data_mining/last_block.dat", "r")
+block_id = tonumber(fd.readAll()) + 1
+fd.close()
+fd = nil
 
 -- convert block id to coordinates via pairing function
 function unpair(z)
@@ -50,6 +54,10 @@ end
 rednet.close("right")
 print("Block done")
 
-local fd = fs.open("data_mining/done.dat", "a")
-fd.write("\n" .. block_id)
+--local fd = fs.open("data_mining/done.dat", "a")
+--fd.write(string.format("\n%d", block_id))
+--fd.close()
+local fd = fs.open("data_mining/last_block.dat", "w")
+fd.write(block_id)
 fd.close()
+fd = nil
