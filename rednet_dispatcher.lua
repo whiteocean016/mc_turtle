@@ -50,5 +50,6 @@ end
 rednet.close("right")
 print("Block done")
 
-fd = fs.open("data_mining/done.dat", "a")
+local fd = fs.open("data_mining/done.dat", "a")
 fd.write("\n" .. block_id)
+fd.close()
