@@ -228,6 +228,8 @@ for h = 1, DEPTH do
         break
     elseif valuable then
         history[h] = ""
+    elseif name_block == "minecraft:stone" then
+        history[h] = "minecraft:cobblestone"
     else
         history[h] = name_block
     end
@@ -255,6 +257,7 @@ for d = depth_current, 1, -1 do
         --    turtle.select(junk)
         --    turtle.placeDown()
         --end
+        --TODO handle cobblestone separately...
         success, idx = find_block(history[d])
         if success then
             turtle.select(idx)
