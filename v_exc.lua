@@ -182,12 +182,12 @@ end
 
 function find_block(name)
     local data
-    for i = 1, 16 do
+    for i = 16, 1, -1 do
         data = turtle.getItemDetail(i)
         if data then
             local str = string.lower(data.name)
-
-            if str == name then
+            -- when searching for stone don't return redstone
+            if string.find(str, name) and not string.find(str, "redstone") then
                 return true, i
             end
         end
@@ -229,7 +229,8 @@ for h = 1, DEPTH do
     elseif valuable then
         history[h] = ""
     elseif name_block == "minecraft:stone" then
-        history[h] = "minecraft:cobblestone"
+        -- can't easily differentiate between some stones (granite, diorite, ...)
+        history[h] = "stone"
     else
         history[h] = name_block
     end
@@ -252,12 +253,6 @@ end
 for d = depth_current, 1, -1 do
     go_up()
     if REFILL then
-        --junk = find_junk()
-        --if junk then
-        --    turtle.select(junk)
-        --    turtle.placeDown()
-        --end
-        --TODO handle cobblestone separately...
         success, idx = find_block(history[d])
         if success then
             turtle.select(idx)
