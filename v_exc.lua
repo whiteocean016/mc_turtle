@@ -36,21 +36,21 @@ print("Refill = ", REFILL)
 
 --- FUNCTIONS ---
 
---TODO find any kind of fuel and only return slot number
-function findAndRefuel()
+function findFuel()
     for i = 1, 16 do
         turtle.select(i)
-        if turtle.refuel(1) then
+        if turtle.refuel(0) then
             return i
         end
     end
-    return false
+    return nil
 end
 
 -- Fuel
 function fuel()
     if turtle.getFuelLevel() < 1 then
-        findAndRefuel()
+        idx_fuel = findFuel()
+        turtle.refuel(idx_fuel)
     end
 end
 
@@ -202,7 +202,7 @@ end
 
 -- Fuel check in advance
 --TODO calculate available fuel (distance) from inventory
-local fuelSlot = findAndRefuel()
+local fuelSlot = findFuel()
 local currentFuelLevel = turtle.getFuelLevel()
 local availableFuelLevel = currentFuelLevel + turtle.getItemCount(fuelSlot)*80
 print("Fuel needed at least: ", (DEPTH)*2 )
