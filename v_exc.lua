@@ -252,7 +252,7 @@ end
 -- return
 for d = depth_current, 1, -1 do
     go_up()
-    if REFILL then
+    if REFILL and history[d] ~= "" then
         success, idx = find_block(history[d])
         if success then
             turtle.select(idx)
