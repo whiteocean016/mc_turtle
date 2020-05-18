@@ -50,7 +50,7 @@ end
 function fuel()
     if turtle.getFuelLevel() < 1 then
         idx_fuel = findFuel()
-        turtle.refuel(idx_fuel)
+        turtle.refuel(1)
     end
 end
 

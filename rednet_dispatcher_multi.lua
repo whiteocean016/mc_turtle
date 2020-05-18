@@ -53,7 +53,7 @@ end
 while turtles_done ~= 5 do
     senderID, message, distance = rednet.receive(1)
     if message == "done" then
-        task_done = task_done + 1
+        turtles_done = turtles_done + 1
     end
 end
 
