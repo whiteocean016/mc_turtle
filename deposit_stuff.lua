@@ -23,6 +23,7 @@ else
 end
 
 shell.run("gps_go_to", v_chest.x, v_chest.y, v_chest.z)
+turtle.up()
 
 -- drop stuff
 function checkIfFuel()
