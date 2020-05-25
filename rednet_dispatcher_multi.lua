@@ -44,7 +44,7 @@ turtles_done = 0
 for i=1,5 do
     vector_exc = block_current + hole_coords[i]
     print("Exacavating: ", vector_exc)
-    command = "digg_process " .. vector_exc.x .. " " .. vector_exc.y .. " " .. vector_exc.z
+    command = "digg_process " .. vector_exc.x .. " " .. vector_exc.y .. " " .. vector_exc.z .. " " .. (i-1)
     
     rednet.send(turtle_ids[i], command)
 end
