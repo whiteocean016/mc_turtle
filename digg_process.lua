@@ -7,14 +7,19 @@ local args = {...}
 
 local x, y, z
 
-if #args == 3 then
+if #args == 3
+    x = tonumber( args[1] )
+    y = tonumber( args[2] )
+    z = tonumber( args[3] )
+    v_digg = vector.new(x, y, z)
+elseif #args == 4 then
     x = tonumber( args[1] )
     y = tonumber( args[2] )
     z = tonumber( args[3] )
     deposit_slot = tonumber( args[4] )
     v_digg = vector.new(x, y, z)
 else 
-    error("Usage: digg_process x y z \n")
+    error("Usage: digg_process x y z [deposit_slot] \n")
 end
 
 shell.run("gps_go_to", v_digg.x, v_digg.y, v_digg.z)
