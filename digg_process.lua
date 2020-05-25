@@ -7,7 +7,7 @@ local args = {...}
 
 local x, y, z
 
-if #args == 3
+if #args == 3 then
     x = tonumber( args[1] )
     y = tonumber( args[2] )
     z = tonumber( args[3] )
