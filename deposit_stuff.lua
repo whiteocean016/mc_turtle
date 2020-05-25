@@ -6,8 +6,13 @@ local args = {...}
 
 local x, y, z
 
+default_chest = vector.new(261, 69, 350)
+
 if #args == 0 then
-    v_chest = vector.new(261, 69, 350)
+    v_chest = default_chest
+elseif #args == 1 then
+    deposit_slot = tonumber( args[1] )
+    v_chest = default_chest + vector.new(0, 0, deposit_slot)
 elseif #args == 3 then
     x = tonumber( args[1] )
     y = tonumber( args[2] )
